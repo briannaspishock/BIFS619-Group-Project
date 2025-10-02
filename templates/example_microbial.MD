@@ -51,6 +51,8 @@ fastqc starvation/*.fastq -o qc_reports
 # Put all reports together using MultiQC
 cd qc_reports
 multiqc .
+# Generate QC plots 
+multiqc . --export
 ```
 
 - **Tasks Performed:**  
@@ -59,7 +61,9 @@ multiqc .
   - Ran MultiQC to put all FastQC results into a single summary report (`multiqc_report.html`)  
 
 - **Deliverables:**  
-  - (Example) Insert QC plots (e.g., per base quality, adapter content)  
+  - Insert QC plots (e.g., per base quality, adapter content)  
+
+
   - (Example) Insert Table: Raw read counts, duplication rates  
 - **Interpretation:**  
   - Brief narrative of overall quality  
