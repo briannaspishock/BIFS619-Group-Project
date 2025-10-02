@@ -10,19 +10,28 @@
   - SRR11998467 -oxidative
   - SRR11998457 -acidic
 
+## Download Salmonella RNA-seq Data
 
-- **Commands used to download data:**
-  ```bash
-prefetch SRR11998457
-prefetch SRR11998467
-prefetch SRR11998473
+```bash
+# Navigate to analysis directory
+cd ~/groupproject
+
+# Acidic stress
 mkdir -p acidic
+prefetch SRR11998457
 fasterq-dump SRR11998457 --split-files --threads 8 --outdir acidic
+
+# Oxidative stress
 mkdir -p oxidative
+prefetch SRR11998467
 fasterq-dump SRR11998467 --split-files --threads 8 --outdir oxidative
+
+# Starvation stress
 mkdir -p starvation
+prefetch SRR11998473
 fasterq-dump SRR11998473 --split-files --threads 8 --outdir starvation
 ```
+
 
 
 ## Quality Control (QC)
