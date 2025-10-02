@@ -67,8 +67,22 @@ multiqc . --export
 - [Sequence Duplication Levels](multiqc_plots/mqc_fastqc_sequence_duplication_levels_plot_1.png)
 - [Per Sequence GC Content](multiqc_plots/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png)
 
+  Insert Table
 
-  - (Example) Insert Table: Raw read counts, duplication rates  
+  ### Raw Read Counts and Duplication Rates
+
+### Raw Read Counts and Duplication Rates
+
+| Sample       | Condition  | Raw Reads   | Duplication % | GC % | Avg Length (bp) |
+|--------------|------------|-------------|---------------|------|-----------------|
+| SRR11998457_1 | Acidic     | 4.5 M       | 76%           | 50%  | 143 |
+| SRR11998457_2 | Acidic     | 4.5 M       | 79%           | 50%  | 151 |
+| SRR11998467_1 | Oxidative  | 10.2 M      | 88%           | 51%  | 143 |
+| SRR11998467_2 | Oxidative  | 10.2 M      | 88%           | 51%  | 151 |
+| SRR11998473_1 | Starvation | 5.4 M       | 88%           | 51%  | 143 |
+| SRR11998473_2 | Starvation | 5.4 M       | 88%           | 50%  | 151 |
+ 
+
 - **Interpretation:**  
   - Brief narrative of overall quality  
   - Any concerns identified in the QC step  
