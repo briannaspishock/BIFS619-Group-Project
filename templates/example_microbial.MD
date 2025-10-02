@@ -13,19 +13,16 @@
 
 - **Commands used to download data:**
   ```bash
-
 prefetch SRR11998457
 prefetch SRR11998467
 prefetch SRR11998473
-
 mkdir -p acidic
 fasterq-dump SRR11998457 --split-files --threads 8 --outdir acidic
-
 mkdir -p oxidative
 fasterq-dump SRR11998467 --split-files --threads 8 --outdir oxidative
-
 mkdir -p starvation
 fasterq-dump SRR11998473 --split-files --threads 8 --outdir starvation
+```
 
 
 ## Quality Control (QC)
