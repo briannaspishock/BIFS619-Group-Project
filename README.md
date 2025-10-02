@@ -1,32 +1,80 @@
-# RNA-Seq Analysis Project
-This repository contains code, results, and documentation for our BIFS619 group project. The goal of this project is to analyze microbial RNA-seq data using a reproducible pipeline, from raw FASTQ files to quality control, alignment, quantification, and visualization.
+# Group Project: RNA-Seq Workflow (Microbial)
 
-/data       → placeholder for raw and processed data (not uploaded; SRR IDs only)  
-/scripts    → all code (QC, trimming, alignment, quantification, plotting)  
-/results    → figures, tables, plots generated from analysis  
-/reports    → Analysis Report, Team Report, Individual Reports  
+## Preparation
+- **GitHub Setup**
+  - Team members: Brianna Spishock, Youngju Jeon, Brendan O'Brien 
 
-# Workflow Overview
-Data Retrieval – Download FASTQ files from SRA (3 samples).
-Quality Control – FastQC + MultiQC reports for raw reads.
-Read Cleaning – Adapter/quality trimming using fastp or Cutadapt/Trimmomatic.
-Alignment – Reads mapped to reference genome (HISAT2/Salmon).
-Quantification – Expression levels quantified (Salmon/featureCounts).
-Analysis & Visualization – Heatmaps, top expressed genes, and biological interpretation.
-Reporting – Analysis Report + Team Report compiled with results and discussion.
+## Data Retrieval
+- **NCBI SRA accessions used:**
+  - SRR11998473 -starvation
+  - SRR11998467 -oxidative
+  - SRR11998457 -acidic
 
-# Tools & Dependencies
-FastQC / MultiQC
-fastp 
-HISAT2 
-featureCounts
-Python (matplotlib, seaborn) for plots
-Environment: managed with Conda for reproducibility
+## Download Salmonella RNA-seq Data
 
-# Deliverables
-Quality control plots + summary table
-Pre/post trimming comparison
-Alignment metrics table/plots
-Expression table (TPM/CPM)
-Heatmap of top 10–20 expressed genes
-Final reports (Analysis + Team + Individual)
+```bash
+# Navigate to analysis directory
+cd ~/groupproject
+
+# Acidic stress
+mkdir -p acidic
+prefetch SRR11998457
+fasterq-dump SRR11998457 --split-files --threads 8 --outdir acidic
+
+# Oxidative stress
+mkdir -p oxidative
+prefetch SRR11998467
+fasterq-dump SRR11998467 --split-files --threads 8 --outdir oxidative
+
+# Starvation stress
+mkdir -p starvation
+prefetch SRR11998473
+fasterq-dump SRR11998473 --split-files --threads 8 --outdir starvation
+```
+
+
+## Quality Control (QC)
+- **Tools Used:** 
+  - FastQC
+```bash
+# Create an output folder for FastQC reports
+mkdir -p qc_reports
+
+# Run FastQC on all FASTQ files inside each condition folder
+fastqc acidic/*.fastq -o qc_reports
+fastqc oxidative/*.fastq -o qc_reports
+fastqc starvation/*.fastq -o qc_reports
+```
+  - MultiQC
+
+```bash
+# Put all reports together using MultiQC
+cd qc_reports
+multiqc .
+# Generate QC plots 
+multiqc . --export
+```
+
+- **Tasks Performed:**  
+  - Ran FastQC on all paired-end FASTQ files across three conditions (acidic, oxidative, starvation)
+  - Generated per-sample QC reports (`*_fastqc.html`) with metrics for sequence quality, GC content, duplication, and adapter contamination  
+  - Ran MultiQC to put all FastQC results into a single summary report (`multiqc_report.html`)  
+
+- **Deliverables:**  
+- Insert QC plots
+- [MultiQC Report](multiqc_report_1.html)
+- [Adapter Content Plot](multiqc_plots/mqc_fastqc_adapter_content_plot_1.png)
+- [Sequence Duplication Levels](multiqc_plots/mqc_fastqc_sequence_duplication_levels_plot_1.png)
+- [Per Sequence GC Content](multiqc_plots/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png)
+
+
+  - (Example) Insert Table: Raw read counts, duplication rates  
+- **Interpretation:**  
+  - Brief narrative of overall quality  
+  - Any concerns identified in the QC step  
+
+## Read Cleaning
+- **Tools Used:** 
+- **Tasks Performed:**  
+- **Deliverables:**  
+- **Interpretation:**  
