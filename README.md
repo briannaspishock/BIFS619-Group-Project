@@ -84,7 +84,8 @@ Insert Table
 - Raw read counts were highest in the oxidative condition (~20M), moderate in starvation (~10M), and lowest in acidic (~9M). GC content was stable at ~50–51%. High duplication levels (>75%) in RNA-seq raw reads. There is a need for trimming and filtering in the read cleaning step.
 
 ## Read Cleaning
-- **Tools Used: fastp
+- **Tools Used:
+- Fastp
  ```bash
 #Acidic
 fastp -i acidic/SRR11998457_1.fastq \
@@ -114,7 +115,10 @@ fastp \
 
 
 ```
+- **Tasks Performed:** 
+  - Ran `fastp` on all paired-end reads for each condition
+  - Removed low-quality bases and adapter sequences from raw reads  
+  - Generated per-sample trimming reports (`fastp_report.html` and `fastp_report.json`)  
 
-- **Tasks Performed:**  
 - **Deliverables:**  
 - **Interpretation:**  
