@@ -141,6 +141,10 @@ fastqc oxidative/*trimmed.fastq -o qc_reports/trimmed
 
 # Starvation
 fastqc starvation/*trimmed.fastq -o qc_reports/trimmed
+
+# Rerun MultiQC on trimmed files
+cd qc_reports/trimmed
+multiqc . -o ../multiqc_trimmed
 ```
 - **Deliverables:**  
 - **Interpretation:**  
