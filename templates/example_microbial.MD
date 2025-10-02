@@ -33,11 +33,20 @@ fasterq-dump SRR11998473 --split-files --threads 8 --outdir starvation
 ```
 
 
-
 ## Quality Control (QC)
 - **Tools Used:** 
-  - (Example) FastQC
-  - (Example) MultiQC
+  - FastQC
+```bash
+# Create an output folder for FastQC reports
+mkdir -p qc_reports
+
+# Run FastQC on all FASTQ files inside each condition folder
+fastqc acidic/*.fastq -o qc_reports
+fastqc oxidative/*.fastq -o qc_reports
+fastqc starvation/*.fastq -o qc_reports
+```
+  - MultiQC
+
 - **Tasks Performed:**  
   - (Example) Generated per-sample QC reports  
   - (Example) Summarized read quality, GC content, adapter contamination, duplication  
