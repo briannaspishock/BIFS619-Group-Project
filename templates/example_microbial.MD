@@ -61,8 +61,11 @@ multiqc . --export
   - Ran MultiQC to put all FastQC results into a single summary report (`multiqc_report.html`)  
 
 - **Deliverables:**  
-  - Insert QC plots (e.g., per base quality, adapter content)  
-
+  - Insert QC plots 
+  -[MultiQC Report](multiqc_report_1.html)
+  -[Adapter Content Plot](mqc_fastqc_adapter_content_plot_1.png)
+  -[Sequence Duplication Levels](mqc_fastqc_sequence_duplication_levels_plot_1.png)
+  -[Per Sequence GC content](mqc_fastqc_per_sequence_gc_content_plot_Percentages.png)
 
   - (Example) Insert Table: Raw read counts, duplication rates  
 - **Interpretation:**  
