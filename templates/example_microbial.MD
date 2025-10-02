@@ -1,8 +1,10 @@
+# Moved to README 
+
 # Group Project: RNA-Seq Workflow (Microbial)
 
 ## Preparation
 - **GitHub Setup**
-  - Team members: Brianna Spishock, Youngju Jeon, Brendan O'Brien 
+  - Team members: 
 
 ## Data Retrieval
 - **NCBI SRA accessions used:**
