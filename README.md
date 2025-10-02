@@ -81,8 +81,7 @@ Insert Table
  
 
 - **Interpretation:**  
-  - Brief narrative of overall quality  
-  - Any concerns identified in the QC step  
+- Raw read counts were highest in the oxidative condition (~20M), moderate in starvation (~10M), and lowest in acidic (~9M). GC content was stable at ~50–51%. High duplication levels (>75%) in RNA-seq raw reads. There is a need for trimming and filtering in the read cleaning step.
 
 ## Read Cleaning
 - **Tools Used:** 
