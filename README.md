@@ -60,8 +60,8 @@ multiqc . --export
   - Generated per-sample QC reports (`*_fastqc.html`) with metrics for sequence quality, GC content, duplication, and adapter contamination  
   - Ran MultiQC to put all FastQC results into a single summary report (`multiqc_report.html`)  
 
-- **Deliverables:**  
-- Insert QC plots
+- **Deliverables:**
+  Insert QC plots
 - [MultiQC Report](multiqc_report_1.html)
 - [Adapter Content Plot](multiqc_plots/mqc_fastqc_adapter_content_plot_1.png)
 - [Sequence Duplication Levels](multiqc_plots/mqc_fastqc_sequence_duplication_levels_plot_1.png)
