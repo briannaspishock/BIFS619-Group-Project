@@ -47,9 +47,17 @@ fastqc starvation/*.fastq -o qc_reports
 ```
   - MultiQC
 
+```bash
+# Put all reports together using MultiQC
+cd qc_reports
+multiqc .
+```
+
 - **Tasks Performed:**  
-  - (Example) Generated per-sample QC reports  
-  - (Example) Summarized read quality, GC content, adapter contamination, duplication  
+  - Ran FastQC on all paired-end FASTQ files across three conditions (acidic, oxidative, starvation)
+  - Generated per-sample QC reports (`*_fastqc.html`) with metrics for sequence quality, GC content, duplication, and adapter contamination  
+  - Ran MultiQC to put all FastQC results into a single summary report (`multiqc_report.html`)  
+
 - **Deliverables:**  
   - (Example) Insert QC plots (e.g., per base quality, adapter content)  
   - (Example) Insert Table: Raw read counts, duplication rates  
