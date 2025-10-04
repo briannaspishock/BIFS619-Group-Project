@@ -68,22 +68,22 @@ multiqc . --export
 - [Per Sequence GC Content](multiqc_plots/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png)
 
 Insert Table
-### Raw Read Counts and Duplication Rates
+### Raw Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 
 | Sample        | Condition   | Raw Reads | Duplication % | GC % | Avg Length (bp) |
-|---------------|-------------|-----------|---------------|------|-----------------|
-| SRR11998457_1 | Acidic      | 22.7 M    | 100%          | 50%  | 143             |
-| SRR11998457_2 | Acidic      | 22.7 M    | 100%          | 50%  | 151             |
-| SRR11998467_1 | Oxidative   | 10.2 M    | 100%          | 51%  | 143             |
-| SRR11998467_2 | Oxidative   | 10.2 M    | 100%          | 51%  | 151             |
-| SRR11998473_1 | Starvation  | 5.4 M     | 100%          | 51%  | 143             |
-| SRR11998473_2 | Starvation  | 5.4 M     | 100%          | 50%  | 151             |
+|---------------|-------------|-----------|--------------|------|------------------|
+| SRR11998457_1 | Acidic      | 22.7 M    | 89.3%         | 50%  | 143             |
+| SRR11998457_2 | Acidic      | 22.7 M    | 90.7%         | 50%  | 151             |
+| SRR11998467_1 | Oxidative   | 10.2 M    | 87.5%         | 51%  | 143             |
+| SRR11998467_2 | Oxidative   | 10.2 M    | 88.4%         | 51%  | 151             | 
+| SRR11998473_1 | Starvation  | 5.4 M     | 88.1%         | 51%  | 143             | 
+| SRR11998473_2 | Starvation  | 5.4 M     | 88.4%         | 50%  | 151             | 
 
  
 
 - **Interpretation:**  
 - Read counts: Range from 22.7M in acidic to 5.4M in starvation. This reflects sequencing depth across different conditions.
-- Duplication: Reported as 100% in all samples.
+- Duplication: 87.5-90.7%
 - GC content: Stable at 50-51%
 - Read length: forward reads are 143bp and reverse reads are 151bp, consistent with expected paired-end design.
 
@@ -154,20 +154,20 @@ multiqc . -o multiqc_trimmed
 
 
 Insert Table
-### Cleaned Read Counts and Duplication Rates
+### Cleaned Read Counts and Duplication Rates (from multiqc_general_stats.txt)
+| Sample        | fastp Dup % | fastp Q30 Rate | fastp Q30 Bases | fastp GC % | % Surviving | % Adapters | FastQC Dup % | FastQC GC % | Avg Length (bp) | Total Reads |
+|---------------|-------------|----------------|-----------------|------------|-------------|------------|--------------|-------------|-----------------|-------------|
+| SRR11998457_1 | 66.3%       | 0.0            | 0.0             | 50.5%      | 92.6%       | 7.9%       | 88.4%        | 50.0%       | 141.2           | 21.0 M      |
+| SRR11998457_2 | —           | —              | —               | —          | —           | —          | 89.9%        | 50.0%       | 149.9           | 21.0 M      |
+| SRR11998467_1 | 66.7%       | 0.0            | 0.0             | 51.2%      | 92.0%       | 6.3%       | 86.4%        | 51.0%       | 141.8           | 9.4 M       |
+| SRR11998467_2 | —           | —              | —               | —          | —           | —          | 87.5%        | 50.0%       | 150.7           | 9.4 M       |
+| SRR11998473_1 | 67.8%       | 0.0            | 0.0             | 50.9%      | 90.6%       | 9.8%       | 86.9%        | 51.0%       | 141.2           | 4.8 M       |
+| SRR11998473_2 | —           | —              | —               | —          | —           | —          | 87.4%        | 50.0%       | 149.8           | 4.8 M       |
 
-| Sample               | Condition   | Clean Reads | Duplication % | GC % | Avg Length (bp) |
-|----------------------|-------------|-------------|---------------|------|-----------------|
-| SRR11998457_1.clean  | Acidic      | 21.0 M      | 100%          | 50%  | 30–143          |
-| SRR11998457_2.clean  | Acidic      | 21.0 M      | 100%          | 50%  | 31–151          |
-| SRR11998467_1.clean  | Oxidative   | 9.4 M       | 100%          | 51%  | 30–143          |
-| SRR11998467_2.clean  | Oxidative   | 9.4 M       | 100%          | 50%  | 31–151          |
-| SRR11998473_1.clean  | Starvation  | 4.8 M       | 100%          | 51%  | 31–143          |
-| SRR11998473_2.clean  | Starvation  | 4.8 M       | 100%          | 50%  | 31–151          |
 
 - **Interpretation:**  
-- Read counts: Read count less than raw reads (22.7M -> 21.0M, 10.2M -> 9.4M, 5.4M -> 4.8M). Approximately 90% of sequences were passed through cleaning. Low quality bases were no trimmed due to hidden scores. This drop is due to adapter removal and fixed trimming.
-- Duplication: Still showing 100%. 
+- Read counts: Read count less than raw reads (22.7M -> 21.0M, 10.2M -> 9.4M, 5.4M -> 4.8M). ~90% of sequences were passed through cleaning. Low quality bases were no trimmed due to hidden scores. This drop is due to adapter removal and fixed trimming.
+- Duplication: 66-68% in fastp, 86-90% in fastqc. Still remains high but consistent with RNA-seq.
 - GC content: Still stable at 50-51%. Trimming did not change base composition. 
-- Read length: Varied between 30-151bp due to adapter trimming clipping reads to different lengths.
+- Read length: Varied between 141-151bp due to adapter trimming clipping reads to different lengths.
 
