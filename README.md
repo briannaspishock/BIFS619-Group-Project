@@ -144,9 +144,10 @@ multiqc . -o multiqc_trimmed
 ```
 - **Tasks Performed:** 
   - Ran `fastp` on all paired-end reads for each condition
-  - Removed low-quality bases and adapter sequences from raw reads  
-  - Generated per-sample trimming reports (`fastp_report.html` and `fastp_report.json`)    
+  - Removed adapter sequences from raw reads. Quality filtering was disabled due to masked quality scores.
+  - Generated per-sample trimming reports (`.html` and `.json`)    
   - Reran 'fastqc' on the trimmed files
+  - Ran 'multiqc' on the trimmed files
 
 - **Deliverables:**
 - QC plots for cleaned data
