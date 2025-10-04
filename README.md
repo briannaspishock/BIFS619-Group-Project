@@ -38,6 +38,8 @@ fasterq-dump SRR11998473 --split-files --threads 8 --outdir starvation
 ## Quality Control (QC)
 - **Tools Used:** 
   - FastQC
+  - MultiQC
+ 
 ```bash
 # Create an output folder for FastQC reports
 mkdir -p qc_reports
@@ -47,7 +49,6 @@ fastqc acidic/*.fastq -o qc_reports
 fastqc oxidative/*.fastq -o qc_reports
 fastqc starvation/*.fastq -o qc_reports
 ```
-  - MultiQC
 
 ```bash
 # Put all reports together using MultiQC
@@ -88,7 +89,9 @@ QC plots raw data
 
 ## Read Cleaning
 - Tools Used:
-- Fastp
+  - Fastp
+  - MutliQC
+
  ```bash
 #Acidic
 fastp \
@@ -146,8 +149,8 @@ multiqc . -o multiqc_trimmed
   - Ran `fastp` on all paired-end reads for each condition
   - Removed adapter sequences from raw reads. Quality filtering was disabled due to masked quality scores.
   - Generated per-sample trimming reports (`.html` and `.json`)    
-  - Reran 'fastqc' on the trimmed files
-  - Ran 'multiqc' on the trimmed files
+  - Reran `fastqc` on the trimmed files
+  - Ran `multiqc` on the trimmed files
 
 - **Deliverables:**
 - QC plots for cleaned data
