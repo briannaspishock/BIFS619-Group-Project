@@ -169,6 +169,14 @@ multiqc . -o multiqc_trimmed
 | SRR11998473_1 | 67.8%       | 0.0            | 0.0             | 50.9%      | 90.6%       | 9.8%       | 86.9%        | 51.0%       | 141.2           | 4.8 M       |
 | SRR11998473_2 | —           | —              | —               | —          | —           | —          | 87.4%        | 50.0%       | 149.8           | 4.8 M       |
 
+### Raw vs. cleaned read counts.
+| Sample        | Condition   | Raw Reads | Cleaned Reads | % Surviving |
+|---------------|-------------|-----------|---------------|-------------|
+| SRR11998457   | Acidic      | 22.7 M    | 21.0 M        | 92.6%       |
+| SRR11998467   | Oxidative   | 10.2 M    | 9.4 M         | 92.0%       |
+| SRR11998473   | Starvation  | 5.4 M     | 4.8 M         | 90.6%       |
+
+
 
 - **Interpretation:**  
   - Read counts: Read count less than raw reads (22.7M -> 21.0M, 10.2M -> 9.4M, 5.4M -> 4.8M). ~90% of sequences were passed through cleaning. Low quality bases were not trimmed due to hidden scores. This drop is due to adapter removal and fixed trimming.
