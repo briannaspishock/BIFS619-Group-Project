@@ -205,7 +205,7 @@ mkdir reference
 mv styphimurium.* reference/
 
 ```
-## Aligntment
+## Alignment
 - Tools Used:
   - HISAT2
     
