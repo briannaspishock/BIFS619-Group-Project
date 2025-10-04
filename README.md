@@ -10,6 +10,8 @@
   - SRR11998467 -oxidative
   - SRR11998457 -acidic
 
+Bioproject PRJNA638918 "RNA Atlas of Bacterial Human Pathogens Uncovers Stress Dynamics"
+
 ## Download Salmonella RNA-seq Data
 
 ```bash
@@ -170,3 +172,24 @@ multiqc . -o multiqc_trimmed
 - GC content: Still stable at 50-51%. Trimming did not change base composition. 
 - Read length: Varied between 141-151bp due to adapter trimming clipping reads to different lengths.
 
+## Download Salmonella Reference Genome
+
+- **Tasks Performed:** 
+  - Confirm SRR11998457, SRR11998467, and SRR11998473 in BioProject PRJNA638918 are from Salmonella enterica Typhimurium
+  - Found reference genome for Salmonella enterica serovar Typhimurium LT2 (GCF_000006945.2 (ASM694v2))
+  - Downloaded genome FASTA (.fna) and annotation file (.gff)
+  - Renamed files to styphimurium.fna and styphimurium.gff and moved into a reference directory
+
+```bash
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_genomic.fna.gz
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_genomic.gff.gz
+gunzip *.gz
+
+mv GCF_000006945.2_ASM694v2_genomic.fna styphimurium.fna
+mv GCF_000006945.2_ASM694v2_genomic.gff styphimurium.gff
+
+mkdir reference
+
+mv styphimurium.* reference/
+
+```
