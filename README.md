@@ -61,13 +61,12 @@ multiqc . --export
   - Ran MultiQC to put all FastQC results into a single summary report (`multiqc_report.html`)  
 
 - **Deliverables:**
-  - QC plots
+QC plots raw data
 - [MultiQC Report]()
 - [Adapter Content Plot]()
 - [Sequence Duplication Levels]()
 - [Per Sequence GC Content]()
 
-Insert Table
 ### Raw Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 
 | Sample        | Condition   | Raw Reads | Duplication % | GC % | Avg Length (bp) |
@@ -78,8 +77,6 @@ Insert Table
 | SRR11998467_2 | Oxidative   | 10.2 M    | 88.4%         | 51%  | 151             | 
 | SRR11998473_1 | Starvation  | 5.4 M     | 88.1%         | 51%  | 143             | 
 | SRR11998473_2 | Starvation  | 5.4 M     | 88.4%         | 50%  | 151             | 
-
- 
 
 - **Interpretation:**  
 - Read counts: Range from 22.7M in acidic to 5.4M in starvation. This reflects sequencing depth across different conditions.
@@ -150,10 +147,12 @@ multiqc . -o multiqc_trimmed
   - Reran 'fastqc' on the trimmed files
 
 - **Deliverables:**
-  - QC plots for cleaned data
+- QC plots for cleaned data
+- [MultiQC Report]()
+- [Adapter Content Plot]()
+- [Sequence Duplication Levels]()
+- [Per Sequence GC Content]()
 
-
-Insert Table
 ### Cleaned Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 | Sample        | fastp Dup % | fastp Q30 Rate | fastp Q30 Bases | fastp GC % | % Surviving | % Adapters | FastQC Dup % | FastQC GC % | Avg Length (bp) | Total Reads |
 |---------------|-------------|----------------|-----------------|------------|-------------|------------|--------------|-------------|-----------------|-------------|
