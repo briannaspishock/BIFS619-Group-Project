@@ -187,7 +187,7 @@ multiqc . -o multiqc_trimmed
 ## Download Salmonella Reference Genome
 
 - **Tasks Performed:** 
-  - Confirm SRR11998457, SRR11998467, and SRR11998473 in BioProject PRJNA638918 are from Salmonella enterica Typhimurium
+  - Confirmed SRR11998457, SRR11998467, and SRR11998473 in BioProject PRJNA638918 are from Salmonella enterica Typhimurium
   - Found reference genome for Salmonella enterica serovar Typhimurium LT2 (GCF_000006945.2 (ASM694v2))
   - Downloaded genome FASTA (.fna) and annotation file (.gff)
   - Renamed files to styphimurium.fna and styphimurium.gff and moved into a reference directory
