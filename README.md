@@ -64,11 +64,11 @@ multiqc . --export
   - Ran MultiQC to put all FastQC results into a single summary report (`multiqc_report.html`)  
 
 - **Deliverables:**
-QC plots raw data
-- [MultiQC Report]()
-- [Adapter Content Plot]()
-- [Sequence Duplication Levels]()
-- [Per Sequence GC Content]()
+### QC plots raw data
+  - [MultiQC Report]()
+  - [Adapter Content Plot]()
+  - [Sequence Duplication Levels]()
+  - [Per Sequence GC Content]()
 
 ### Raw Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 
@@ -82,10 +82,10 @@ QC plots raw data
 | SRR11998473_2 | Starvation  | 5.4 M     | 88.4%         | 50%  | 151             | 
 
 - **Interpretation:**  
-- Read counts: Range from 22.7M in acidic to 5.4M in starvation. This reflects sequencing depth across different conditions.
-- Duplication: 87.5-90.7%
-- GC content: Stable at 50-51%
-- Read length: forward reads are 143bp and reverse reads are 151bp, consistent with expected paired-end design.
+  - Read counts: Range from 22.7M in acidic to 5.4M in starvation. This reflects sequencing depth across different conditions.
+  - Duplication: 87.5-90.7%
+  - GC content: Stable at 50-51%
+  - Read length: forward reads are 143bp and reverse reads are 151bp, consistent with expected paired-end design.
 
 ## Read Cleaning
 - Tools Used:
@@ -153,11 +153,11 @@ multiqc . -o multiqc_trimmed
   - Ran `multiqc` on the trimmed files
 
 - **Deliverables:**
-- QC plots for cleaned data
-- [MultiQC Report]()
-- [Adapter Content Plot]()
-- [Sequence Duplication Levels]()
-- [Per Sequence GC Content]()
+### QC plots for cleaned data
+  - [MultiQC Report]()
+  - [Adapter Content Plot]()
+  - [Sequence Duplication Levels]()
+  - [Per Sequence GC Content]()
 
 ### Cleaned Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 | Sample        | fastp Dup % | fastp Q30 Rate | fastp Q30 Bases | fastp GC % | % Surviving | % Adapters | FastQC Dup % | FastQC GC % | Avg Length (bp) | Total Reads |
@@ -171,10 +171,10 @@ multiqc . -o multiqc_trimmed
 
 
 - **Interpretation:**  
-- Read counts: Read count less than raw reads (22.7M -> 21.0M, 10.2M -> 9.4M, 5.4M -> 4.8M). ~90% of sequences were passed through cleaning. Low quality bases were not trimmed due to hidden scores. This drop is due to adapter removal and fixed trimming.
-- Duplication: 66-68% in fastp, 86-90% in fastqc. Still remains high but consistent with RNA-seq.
-- GC content: Still stable at 50-51%. Trimming did not change base composition. 
-- Read length: Varied between 141-151bp due to adapter trimming clipping reads to different lengths.
+  - Read counts: Read count less than raw reads (22.7M -> 21.0M, 10.2M -> 9.4M, 5.4M -> 4.8M). ~90% of sequences were passed through cleaning. Low quality bases were not trimmed due to hidden scores. This drop is due to adapter removal and fixed trimming.
+  - Duplication: 66-68% in fastp, 86-90% in fastqc. Still remains high but consistent with RNA-seq.
+  - GC content: Still stable at 50-51%. Trimming did not change base composition. 
+  - Read length: Varied between 141-151bp due to adapter trimming clipping reads to different lengths.
 
 ## Download Salmonella Reference Genome
 
@@ -197,3 +197,28 @@ mkdir reference
 mv styphimurium.* reference/
 
 ```
+## Alightment
+- Tools Used:
+  - HISAT2
+    
+
+- **Tasks Performed:** 
+  - 
+  - 
+
+- **Deliverables:**
+  - Plots of alignment metrics (total reads, mapping %)
+  - 
+
+## Annotation and Quantification
+- Tools Used:
+  - featureCounts
+    
+- **Tasks Performed:** 
+  - 
+  - 
+
+- **Deliverables:**
+  - Top 10 expressed genes table
+  - Top 10 expressed heatmap
+  - Functional enrichment
