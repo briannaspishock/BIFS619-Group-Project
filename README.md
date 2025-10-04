@@ -171,7 +171,7 @@ multiqc . -o multiqc_trimmed
 
 
 - **Interpretation:**  
-- Read counts: Read count less than raw reads (22.7M -> 21.0M, 10.2M -> 9.4M, 5.4M -> 4.8M). ~90% of sequences were passed through cleaning. Low quality bases were no trimmed due to hidden scores. This drop is due to adapter removal and fixed trimming.
+- Read counts: Read count less than raw reads (22.7M -> 21.0M, 10.2M -> 9.4M, 5.4M -> 4.8M). ~90% of sequences were passed through cleaning. Low quality bases were not trimmed due to hidden scores. This drop is due to adapter removal and fixed trimming.
 - Duplication: 66-68% in fastp, 86-90% in fastqc. Still remains high but consistent with RNA-seq.
 - GC content: Still stable at 50-51%. Trimming did not change base composition. 
 - Read length: Varied between 141-151bp due to adapter trimming clipping reads to different lengths.
