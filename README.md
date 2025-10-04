@@ -62,10 +62,10 @@ multiqc . --export
 
 - **Deliverables:**
   - QC plots
-- [MultiQC Report](multiqc_report_1.html)
-- [Adapter Content Plot](multiqc_plots/mqc_fastqc_adapter_content_plot_1.png)
-- [Sequence Duplication Levels](multiqc_plots/mqc_fastqc_sequence_duplication_levels_plot_1.png)
-- [Per Sequence GC Content](multiqc_plots/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png)
+- [MultiQC Report]()
+- [Adapter Content Plot]()
+- [Sequence Duplication Levels]()
+- [Per Sequence GC Content]()
 
 Insert Table
 ### Raw Read Counts and Duplication Rates (from multiqc_general_stats.txt)
