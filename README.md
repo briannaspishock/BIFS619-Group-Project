@@ -64,7 +64,7 @@ multiqc . --export
   - Ran MultiQC to put all FastQC results into a single summary report (`multiqc_report.html`)  
 
 - **Deliverables:**
-### QC plots raw data
+### 1-2 QC plots raw data
   - [MultiQC Report]()
   - [Adapter Content Plot]()
   - [Sequence Duplication Levels]()
@@ -153,7 +153,7 @@ multiqc . -o multiqc_trimmed
   - Ran `multiqc` on the trimmed files
 
 - **Deliverables:**
-### QC plots for cleaned data
+### 1-2 QC plots for cleaned data
   - [MultiQC Report]()
   - [Adapter Content Plot]()
   - [Sequence Duplication Levels]()
@@ -197,7 +197,7 @@ mkdir reference
 mv styphimurium.* reference/
 
 ```
-## Alightment
+## Aligntment
 - Tools Used:
   - HISAT2
     
