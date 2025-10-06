@@ -224,7 +224,7 @@ mv styphimurium.* reference/
     
 - **Tasks Performed:** 
   - Setup + Folders
-  - #install Salmon via conda
+#install Salmon via conda
 mamba create -n salmon-env -c bioconda -c conda-forge salmon pigz parallel -y
 conda activate salmon-env
 
