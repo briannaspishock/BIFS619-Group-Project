@@ -350,7 +350,7 @@ for cond in acidic oxidative starvation; do
   echo -e "locus_tag\tTPM_sum\tgene_name\tproduct" > "$tmp"
   cat "$file" >> "$tmp"
   mv "$tmp" "$file"
-  echo "✅ Added header to $file"
+  echo "Added header to $file"
 done
 ```
 
