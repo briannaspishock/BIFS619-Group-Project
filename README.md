@@ -357,7 +357,13 @@ done
    
   contains:
     
-  locus_tag, TPM_sum, gene_name, product
+  locus_tag : The unique gene ID in the genome (from the annotation .gff file)
+  
+  TPM_sum : The total expression level for that gene, summed across its transcripts. The higher the TPM, the more abundant the RNA
+  
+  gene_name : The standard gene symbol
+  
+  product : The protein or functional product encoded by the gene
     
    
 
