@@ -224,6 +224,7 @@ mv styphimurium.* reference/
     
 - **Tasks Performed:** 
   - Setup + Folders
+
 ```bash
 #install Salmon via conda
 mamba create -n salmon-env -c bioconda -c conda-forge salmon pigz parallel -y
@@ -231,16 +232,33 @@ conda activate salmon-env
 cd ~/groupproject
 mkdir -p ref quant tables logs
 ```
+
   - Get reference (CDS + GFF) for Salmonella
+
 ```bash
 cd ref
 #Genome coding sequences (CDS), proteins, and GFF annotation
 wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_cds_from_genomic.fna.gz
 wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_genomic.gff.gz
 wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_protein.faa.gz
+
+#decompress all the .gz files
+pigz -d *.gz
+cd ..
+
 ```
 
-  - 
+  - Build Salmon index (from CDS)
+```bash
+salmon index \
+  -t ref/GCF_000006945.2_ASM694v2_cds_from_genomic.fna \
+-i ref/salmon_cds_index
+```
+
+  -Quantify each condition with Salmon
+  
+
+
 
 - **Deliverables:**
   - Top 10 expressed genes table
