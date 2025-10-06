@@ -280,6 +280,12 @@ for cond in acidic oxidative starvation; do
 Done
 ```
 
+  -check of mapping rates
+```bash
+grep -E "Mapping rate|chosen|libType" logs/*.salmon.log
+```
+
+  -
 
 
 
