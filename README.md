@@ -256,7 +256,30 @@ salmon index \
 ```
 
   -Quantify each condition with Salmon
-  
+```bash
+#take the raw RNA-seq reads (*_1.fastq and *_2.fastq) from each folder and produces expression quantification results (TPM, counts, etc.) for each condition.
+for cond in acidic oxidative starvation; do
+#find the forward read file (_1.fastq) inside the folder for that condition and stores the file name in a variable called r1
+  r1=$(ls ${cond}/*_1.fastq)
+#does the same for the reverse read file (_2.fastq)
+  r2=$(ls ${cond}/*_2.fastq) 
+#calls Salmon, a tool that estimates how much each gene (or transcript) is expressed by aligning reads to the reference CDS database (from salmon_cds_index)
+  salmon quant \   
+#Tells Salmon which index (the pre-built reference from your CDS FASTA) to use
+    -i ref/salmon_cds_index \
+#Tells Salmon to automatically detect the library type
+    -l A \
+#Specifies the paired-end read files for quantification
+    -1 "$r1" -2 "$r2" \
+#Use 8 CPU threads to speed up processing. Enable GC-bias correction, which adjusts expression estimates if GC-rich genes are over- or under-represented in sequencing.
+    -p 8 --gcBias --validateMappings \
+#Writes all the results into a separate output folder
+    -o quant/${cond} \
+#Redirects all log messages and errors from Salmon into a log file per condition
+    2> logs/${cond}.salmon.log
+Done
+```
+
 
 
 
