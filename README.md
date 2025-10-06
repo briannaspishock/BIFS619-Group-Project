@@ -347,7 +347,7 @@ for cond in acidic oxidative starvation; do
 done
 ```
 
-  -Each 
+  -Each \n
   tables/top10_acidic_TPM.annot.tsv 
   tables/top10_oxidative_TPM.annot.tsv
   tables/top10_starvation_TPM.annot.tsv
