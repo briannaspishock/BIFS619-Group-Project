@@ -219,11 +219,15 @@ mv styphimurium.* reference/
   - 
 
 ## Annotation and Quantification
-- Tools Used:
+- Tools Used: Salmon
   - featureCounts
     
 - **Tasks Performed:** 
-  - 
+  - Setup + Folders
+  - #install Salmon via conda
+mamba create -n salmon-env -c bioconda -c conda-forge salmon pigz parallel -y
+conda activate salmon-env
+
   - 
 
 - **Deliverables:**
