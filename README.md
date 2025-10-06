@@ -347,15 +347,19 @@ for cond in acidic oxidative starvation; do
 done
 ```
 
-  -Each \n
-  tables/top10_acidic_TPM.annot.tsv 
-  tables/top10_oxidative_TPM.annot.tsv
-  tables/top10_starvation_TPM.annot.tsv
+  -Each
+  
+  tables/top10_acidic_TPM.annot.tsv
+
+   tables/top10_oxidative_TPM.annot.tsv
+   
+   tables/top10_starvation_TPM.annot.tsv
+   
   contains:
-locus_tag    TPM_sum    gene_name    product
-
-
-
+    
+  locus_tag, TPM_sum, gene_name, product
+    
+   
 
 - **Deliverables:**
   - Top 10 expressed genes table
