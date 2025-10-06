@@ -354,32 +354,6 @@ done
   contains:
 locus_tag    TPM_sum    gene_name    product
 
-  -Make a single matrix of gene TPMs
-```bash
-# start from acidic gene TPMs
-join -t $'\t' -1 1 -2 1 \
-  <(join -t $'\t' -1 1 -2 1 \
-      <(sort -k1,1 tables/acidic.tx_tpm.tsv) <(sort -k1,1 tables/tx2gene.tsv) \
-      | awk -F'\t' '{tpm[$3]+=$2} END{for(g in tpm) print g"\t"tpm[g]}' \
-      | sort -k1,1) \
-  <(join -t $'\t' -1 1 -2 1 \
-      <(sort -k1,1 tables/oxidative.tx_tpm.tsv) <(sort -k1,1 tables/tx2gene.tsv) \
-      | awk -F'\t' '{tpm[$3]+=$2} END{for(g in tpm) print g"\t"tpm[g]}' \
-      | sort -k1,1) \
-| join -t $'\t' -1 1 -2 1 - \
-  <(join -t $'\t' -1 1 -2 1 \
-      <(sort -k1,1 tables/starvation.tx_tpm.tsv) <(sort -k1,1 tables/tx2gene.tsv) \
-      | awk -F'\t' '{tpm[$3]+=$2} END{for(g in tpm) print g"\t"tpm[g]}' \
-      | sort -k1,1) \
-> tables/gene_TPM_matrix.tsv
-
-# add headers and annotations
-{ echo -e "locus_tag\tacidic_TPM\toxidative_TPM\tstarvation_TPM\tgene\tproduct";
-  join -t $'\t' -1 1 -2 1 <(sort -k1,1 tables/gene_TPM_matrix.tsv) <(sort -k1,1 tables/gene_annot.tsv) \
-  | awk -F'\t' 'BEGIN{OFS="\t"}{print $1,$2,$3,$4, ($5==""?"-":$5), ($6==""?"-":$6)}'
-} > tables/gene_TPM_matrix_annot.tsv
-```
-
 
 
 
