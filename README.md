@@ -320,21 +320,28 @@ awk -F'\t' '$3=="gene"{
 sort -k1,1 tables/tx2gene.tsv -o tables/tx2gene.tsv
 
 for cond in acidic oxidative starvation; do
+  # Extract transcript and TPM
   awk 'NR>1{print $1"\t"$4}' quant/${cond}/quant.sf \
     | sort -k1,1 > tables/${cond}.tx_tpm.tsv
 
+  # Sum TPM per gene
   join -t $'\t' -1 1 -2 1 tables/${cond}.tx_tpm.tsv tables/tx2gene.tsv \
     | awk -F'\t' '{tpm[$3]+=$2} END{for(g in tpm) print g"\t"tpm[g]}' \
     | sort -k2,2nr | head -n 10 > tables/top10_${cond}_TPM.raw.tsv
 
+  # Annotate gene names and products
   sort -k1,1 tables/top10_${cond}_TPM.raw.tsv > tables/a.tmp
   sort -k1,1 tables/gene_annot.tsv > tables/b.tmp
   join -t $'\t' -1 1 -2 1 tables/a.tmp tables/b.tmp \
     | awk -F'\t' 'BEGIN{OFS="\t"}{print $1,$2,($3==""?"-":$3),($4==""?"-":$4)}' \
     > tables/top10_${cond}_TPM.annot.tsv
+
+sort -k2,2nr tables/top10_${cond}_TPM.annot.tsv -o tables/top10_${cond}_TPM.annot.tsv
+
   rm -f tables/a.tmp tables/b.tmp
   echo "Rebuilt clean top 10 for $cond -> tables/top10_${cond}_TPM.annot.tsv"
 done
+
 
 #Add headers to all 3 files
 for cond in acidic oxidative starvation; do
