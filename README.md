@@ -223,7 +223,7 @@ mv styphimurium.* reference/
   - featureCounts
     
 - **Tasks Performed:** 
-  - Setup + Folders
+  -Setup + Folders
 
 ```bash
 #install Salmon via conda
@@ -233,7 +233,7 @@ cd ~/groupproject
 mkdir -p ref quant tables logs
 ```
 
-  - Get reference (CDS + GFF) for Salmonella
+  -Get reference (CDS + GFF) for Salmonella
 
 ```bash
 cd ref
@@ -248,7 +248,7 @@ cd ..
 
 ```
 
-  - Build Salmon index (from CDS)
+  -Build Salmon index (from CDS)
 ```bash
 salmon index \
   -t ref/GCF_000006945.2_ASM694v2_cds_from_genomic.fna \
@@ -280,12 +280,42 @@ for cond in acidic oxidative starvation; do
 Done
 ```
 
-  -check of mapping rates
+  -Check of mapping rates
 ```bash
 grep -E "Mapping rate|chosen|libType" logs/*.salmon.log
 ```
 
-  -
+  -Map transcript/CDS IDs → locus_tag from the CDS FASTA headers
+```bash
+grep "^>" ref/GCF_000006945.2_ASM694v2_cds_from_genomic.fna \
+| sed 's/^>//' \
+| awk '{
+  tx=$1;
+  lt="";
+  # accept both bracketed and unbracketed forms
+  if (match($0,/locus_tag=([A-Za-z0-9_\.-]+)/,m)) lt=m[1];
+  else if (match($0,/\[locus_tag=([A-Za-z0-9_\.-]+)\]/,m)) lt=m[1];
+  if (lt!="") print tx"\t"lt;
+}' > tables/tx2gene.tsv
+```
+
+  -build a locus_tag → gene_name/product table from the GFF
+```bash
+awk -F'\t' '$3=="gene"{
+  split($9,a,";");
+  lt=""; gn=""; pr="";
+  for(i in a){
+    if(a[i] ~ /^locus_tag=/) lt=substr(a[i],11);
+    else if(a[i] ~ /^gene=/)     gn=substr(a[i],6);
+    else if(a[i] ~ /^Name=/)     pr=substr(a[i],6);
+    else if(a[i] ~ /^product=/)  pr=substr(a[i],9);
+  }
+  if(lt!="") print lt"\t" (gn==""?"-":gn) "\t" (pr==""?"-":pr);
+}' ref/GCF_000006945.2_ASM694v2_genomic.gff \
+> tables/gene_annot.tsv
+```
+
+
 
 
 
