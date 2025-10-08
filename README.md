@@ -18,7 +18,10 @@ Bioproject PRJNA638918 "RNA Atlas of Bacterial Human Pathogens Uncovers Stress D
 # Navigate to analysis directory
 cd ~/groupproject
 
-# Acidic stress
+# install sratool-toolkit to use prefetch and other tools
+sudo apt install sra-toolkit
+
+# Acidic stress 
 mkdir -p acidic
 prefetch SRR11998457
 fasterq-dump SRR11998457 --split-files --threads 8 --outdir acidic
