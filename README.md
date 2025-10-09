@@ -54,6 +54,8 @@ fastqc starvation/*.fastq -o qc_reports
 ```
 
 ```bash
+#install multiqc
+sudo apt install multiqc
 # Put all reports together using MultiQC
 cd qc_reports
 multiqc .
@@ -96,6 +98,14 @@ multiqc . --export
   - MutliQC
 
  ```bash
+# install fastp
+sudo apt install fastp
+
+# make directory for reports
+cd ~/groupproject
+mkdir trimmed
+mkdir qc_reports_trimmed
+
 #Acidic
 fastp \
   -i acidic/SRR11998457_1.fastq \
@@ -139,8 +149,6 @@ fastp \
 ```
 
 ```bash
-cd ~/groupproject
-mkdir qc_reports/trimmed
 
 fastqc -t 8 trimmed/*.fastq.gz -o qc_reports_trimmed
 
@@ -211,15 +219,72 @@ mv styphimurium.* reference/
 ## Alignment
 - Tools Used:
   - HISAT2
-    
+  - Samtools
+  - Subread (https://subread.sourceforge.net/) for feature counting
+```bash
+#install packages
+sudo apt install samtools
+sudo apt install hisat2
+sudo apt install subread
+
+#change directory to ref genome
+cd reference/
+
+#create index files
+hisat2-build styphimurium.fna styph_index
+
+# go back to project folder
+cd ../
+
+#create alignment directory
+mkdir alignment_sam
+
+# perform alignments with Hisat2  using cleaned fastq (these may take a few minutes)
+# Acidic Stress Sample
+hisat2 -p 8 -x reference/styph_index \
+ -1 trimmed/SRR11998457_1.clean.fastq.gz \
+ -2 trimmed/SRR11998457_2.clean.fastq.gz \
+ -S alignment_sam/acidic.sam
+
+# Oxidative Stress Sample
+hisat2 -p 8 -x reference/styph_index \
+ -1 trimmed/SRR11998467_1.clean.fastq.gz \
+ -2 trimmed/SRR11998467_2.clean.fastq.gz \
+ -S alignment_sam/oxidative.sam
+
+# Starvation Stress Sample # My disk storage was full and i got kicked off here
+hisat2 -p 8 -x reference/styph_index \
+ -1 trimmed/SRR11998473_1.clean.fastq.gz \
+ -2 trimmed/SRR11998473_2.clean.fastq.gz \
+ -S alignment_sam/starvation.sam
+
+# processing next steps
+# Create directories for our BAM files
+mkdir alignment_bam
+mkdir alignment_bam_sorted
+
+# 1. Convert SAM to BAM, Sort, and Index
+for sample in acidic oxidative starvation
+do
+  # Convert SAM to BAM
+  samtools view -bS alignment_sam/${sample}.sam > alignment_bam/${sample}.bam
+
+  # Sort the BAM file
+  samtools sort alignment_bam/${sample}.bam -o alignment_bam_sorted/${sample}.sorted.bam
+
+  # Index the sorted BAM file
+  samtools index alignment_bam_sorted/${sample}.sorted.bam
+done
+
+```
 
 - **Tasks Performed:** 
   - 
   - 
 
 - **Deliverables:**
-  - Plots of alignment metrics (total reads, mapping %)
-  - 
+  - Identify top 10 genes expressed
+  - Optional: perform functional enrichment 
 
 ## Annotation and Quantification
 - Tools Used: Salmon
