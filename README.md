@@ -322,14 +322,12 @@ mkdir -p quant tables logs
 cd reference
 #Genome coding sequences (CDS), proteins sequence
 wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_cds_from_genomic.fna.gz
-wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_protein.faa.gz
 
 #decompress all the .gz files
 pigz -d *.gz
 
 #Renamed files
 mv GCF_000006945.2_ASM694v2_cds_from_genomic.fna styphimurium_cds_from_genomic.fna
-mv GCF_000006945.2_ASM694v2_protein.faa styphimurium_protein.faa
 
 cd ..
 
