@@ -305,7 +305,8 @@ done
     
 - **Tasks Performed:** 
 
-Quantification:
+**Quantification:**
+
   -Setup + Folders
 
 ```bash
@@ -361,7 +362,7 @@ Done
 grep -E "Mapping rate|chosen|libType" logs/*.salmon.log
 ```
 
-Annotation:
+**Annotation:**
 
   -Map transcript/CDS IDs → locus_tag from the CDS FASTA headers
 ```bash
