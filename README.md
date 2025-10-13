@@ -326,11 +326,12 @@ wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_AS
 
 #decompress all the .gz files
 pigz -d *.gz
-cd ..
 
 #Renamed files
 mv GCF_000006945.2_ASM694v2_cds_from_genomic.fna styphimurium_cds_from_genomic.fna
 mv GCF_000006945.2_ASM694v2_protein.faa styphimurium_protein.faa
+
+cd ..
 
 ```
 
@@ -352,7 +353,7 @@ for cond in acidic oxidative starvation; do
 #calls Salmon, a tool that estimates how much each gene (or transcript) is expressed by aligning reads to the reference CDS database (from salmon_cds_index)
   salmon quant \   
 #Tells Salmon which index (the pre-built reference from your CDS FASTA) to use
-    -i ref/salmon_cds_index \
+    -i reference/salmon_cds_index \
 #Tells Salmon to automatically detect the library type
     -l A \
 #Specifies the paired-end read files for quantification
@@ -373,7 +374,7 @@ grep -E "Mapping rate|chosen|libType" logs/*.salmon.log
 
   -Map transcript/CDS IDs → locus_tag from the CDS FASTA headers
 ```bash
-grep "^>" ref/GCF_000006945.2_ASM694v2_cds_from_genomic.fna \
+grep "^>" reference/styphimurium_cds_from_genomic.fna \
 | sed 's/^>//' \
 | awk '{
   tx=$1;
@@ -397,7 +398,7 @@ awk -F'\t' '$3=="gene"{
     else if(a[i] ~ /^product=/)  pr=substr(a[i],9);
   }
   if(lt!="") print lt"\t" (gn==""?"-":gn) "\t" (pr==""?"-":pr);
-}' ref/GCF_000006945.2_ASM694v2_genomic.gff \
+}' reference/styphimurium.gff \
 > tables/gene_annot.tsv
 ```
   -Top-10 expressed genes by TPM per condition
