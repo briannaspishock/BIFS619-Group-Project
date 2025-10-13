@@ -70,10 +70,7 @@ multiqc . --export
 
 - **Deliverables:**
 ### 1-2 QC plots raw data
-  - [MultiQC Report]()
-  - [Adapter Content Plot]()
-  - [Sequence Duplication Levels]()
-  - [Per Sequence GC Content]()
+  - QC plots in analysis file
 
 ### Raw Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 
@@ -165,10 +162,7 @@ multiqc . -o multiqc_trimmed
 
 - **Deliverables:**
 ### 1-2 QC plots for cleaned data
-  - [MultiQC Report]()
-  - [Adapter Content Plot]()
-  - [Sequence Duplication Levels]()
-  - [Per Sequence GC Content]()
+  - QC plots in analysis doc
 
 ### Cleaned Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 | Sample        | fastp Dup % | fastp Q30 Rate | fastp Q30 Bases | fastp GC % | % Surviving | % Adapters | FastQC Dup % | FastQC GC % | Avg Length (bp) | Total Reads |
