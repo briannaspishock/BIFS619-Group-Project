@@ -2,7 +2,7 @@
 
 ## Preparation
 - **GitHub Setup**
-  - Team members: Brianna Spishock, Youngju Jeon, Brendan O'Brien 
+  - Team members: Brianna Spishock (QC), Youngju Jeon (Annotation), Brendan O'Brien (Alignment)
 
 ## Data Retrieval
 - **NCBI SRA accessions used:**
@@ -95,7 +95,7 @@ multiqc . --export
 ## Read Cleaning
 - Tools Used:
   - Fastp
-  - MutliQC
+  - MultiQC
 
  ```bash
 # install fastp
@@ -216,6 +216,25 @@ mkdir reference
 mv styphimurium.* reference/
 
 ```
+### The full quality control workflow is provided in [`qc_workflow.sh`](./qc_workflow.sh).
+
+This script:
+
+- Downloads Salmonella RNA-seq data (acidic, oxidative, starvation conditions)
+- Runs `FastQC` and `MultiQC` on raw reads
+- Cleans reads with `fastp` and re-runs QC on trimmed reads
+- Downloads the Salmonella reference genome and annotation files
+
+### Usage
+
+```bash
+#make executable
+chmod +x qc_workflow.sh
+
+#run workflow
+./qc_workflow.sh
+```
+
 ## Alignment
 - Tools Used:
   - HISAT2
