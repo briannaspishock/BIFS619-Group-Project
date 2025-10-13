@@ -328,6 +328,10 @@ wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_AS
 pigz -d *.gz
 cd ..
 
+#Renamed files
+mv GCF_000006945.2_ASM694v2_cds_from_genomic.fna styphimurium_cds_from_genomic.fna
+mv GCF_000006945.2_ASM694v2_protein.faa styphimurium_protein.faa
+
 ```
 
   -Build Salmon index (from CDS)
