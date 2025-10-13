@@ -337,8 +337,8 @@ mv GCF_000006945.2_ASM694v2_protein.faa styphimurium_protein.faa
   -Build Salmon index (from CDS)
 ```bash
 salmon index \
-  -t ref/GCF_000006945.2_ASM694v2_cds_from_genomic.fna \
--i ref/salmon_cds_index
+  -t reference/styphimurium_cds_from_genomic.fna \
+-i reference/salmon_cds_index
 ```
 
   -Quantify each condition with Salmon
