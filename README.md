@@ -216,7 +216,7 @@ mkdir reference
 mv styphimurium.* reference/
 
 ```
-### The full quality control workflow is provided in [`qc_workflow.sh`](./qc_workflow.sh).
+### The full quality control workflow is provided in [`qc_workflow.sh`](./qc_workflow).
 
 This script:
 
