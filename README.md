@@ -324,7 +324,6 @@ samtools flagstat alignment_bam/starvation_sorted.bam > alignment_stats/starvati
 **Quantification:**
 
   -Setup + Folders
-
 ```bash
 #install Salmon via conda
 mamba create -n salmon-env -c bioconda -c conda-forge salmon pigz parallel -y
@@ -366,6 +365,10 @@ salmon quant -i reference/salmon_cds_index -l A \
   -p 8 --validateMappings --gcBias --seqBias \
   -o quant/starvation
 ```
+
+
+**Annotation:**
+
 
   -Build a robust annotation map (CDS → protein_id → gene/product)
 ```bash
