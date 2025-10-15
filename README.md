@@ -337,30 +337,79 @@ mkdir -p quant tables logs
   -Build Salmon index (from CDS)
 ```bash
 salmon index \
-  -t reference/styphimurium_cds_from_genomic.fna \
--i reference/salmon_cds_index
+  -t reference/styph_cds.fna \
+  -i reference/salmon_cds_index \
+  --kmerLen 31
 ```
 
   -Quantify each condition with Salmon
 ```bash
 #take the raw RNA-seq reads (*_1.fastq and *_2.fastq) from each folder and produces expression quantification results (TPM, counts, etc.) for each condition.
-for cond in acidic oxidative starvation; do
-  r1=$(ls ${cond}/*_1.fastq)
-  r2=$(ls ${cond}/*_2.fastq) 
-  salmon quant \   
-    -i reference/salmon_cds_index \
-    -l A \
-    -1 "$r1" -2 "$r2" \
-    -p 8 --gcBias --validateMappings \
-    -o quant/${cond} \
-    2> logs/${cond}.salmon.log
-Done
+# Acidic
+salmon quant -i reference/salmon_cds_index -l A \
+  -1 trimmed/SRR11998457_1.clean.fastq.gz \
+  -2 trimmed/SRR11998457_2.clean.fastq.gz \
+  -p 8 --validateMappings --gcBias --seqBias \
+  -o quant/acidic
+
+# Oxidative
+salmon quant -i reference/salmon_cds_index -l A \
+  -1 trimmed/SRR11998467_1.clean.fastq.gz \
+  -2 trimmed/SRR11998467_2.clean.fastq.gz \
+  -p 8 --validateMappings --gcBias --seqBias \
+  -o quant/oxidative
+
+# Starvation
+salmon quant -i reference/salmon_cds_index -l A \
+  -1 trimmed/SRR11998473_1.clean.fastq.gz \
+  -2 trimmed/SRR11998473_2.clean.fastq.gz \
+  -p 8 --validateMappings --gcBias --seqBias \
+  -o quant/starvation
 ```
 
-  -Check of mapping rates
+  -Build a robust annotation map (CDS → protein_id → gene/product)
 ```bash
-grep -E "Mapping rate|chosen|libType" logs/*.salmon.log
+# FASTA→protein map
+awk '
+  /^>/ {
+    tid=$1; sub(/^>/,"",tid);
+    pid="";
+    if (match($0, /protein_id=([^]]+)/, m)) { 
+      pid=m[1];
+    }
+    if (pid!="") print tid "\t" pid;
+  }
+' reference/styphimurium_cds_from_genomic.fna > maps/fastaid2protein.tsv
+
+# GFF protein→gene/product map
+awk -F'\t' '
+$3=="CDS" {
+  pid=""; ltag=""; prod="";
+  split($9, a, ";");
+  for (i in a) {
+    split(a[i], kv, "=");
+    if (kv[1]=="protein_id") pid=kv[2];
+    else if (kv[1]=="locus_tag") ltag=kv[2];
+    else if (kv[1]=="product")   prod=kv[2];
+  }
+  if (pid!="") print pid"\t"ltag"\t"prod;
+}' reference/styphimurium.gff > maps/protein2gene_product.tsv
+
+#Sort and join on protein_id
+sort -k2,2 maps/fastaid2protein.tsv > maps/fastaid2protein.sorted.tsv   # key is col2
+sort -k1,1 maps/protein2gene_product.tsv > maps/protein2gene_product.sorted.tsv  # key is col1
+
+# Join on protein_id, then reorder to (transcript_id, gene, product)
+join -t $'\t' -1 2 -2 1 maps/fastaid2protein.sorted.tsv maps/protein2gene_product.sorted.tsv \
+| awk -v OFS='\t' '{tid=$2; gene=$3; prod=$4; print tid, gene, prod}' \
+> maps/tx2gene_product.tsv
 ```
+
+  -Top-10 tables
+  
+
+
+
 
 **Annotation:**
 
