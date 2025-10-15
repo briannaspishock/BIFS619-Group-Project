@@ -194,16 +194,18 @@ multiqc . -o multiqc_trimmed
 - **Tasks Performed:** 
   - Confirmed SRR11998457, SRR11998467, and SRR11998473 in BioProject PRJNA638918 are from Salmonella enterica Typhimurium
   - Found reference genome for Salmonella enterica serovar Typhimurium LT2 (GCF_000006945.2 (ASM694v2))
-  - Downloaded genome FASTA (.fna) and annotation file (.gff)
-  - Renamed files to styphimurium.fna and styphimurium.gff and moved into a reference directory
+  - Downloaded genome FASTA (.fna), CDS FASTA(cds_from_genomic.fna) and annotation file (.gff)
+  - Renamed files to styphimurium.fna, styphimurium.gff and styphimurium_cds_from_genomic.fna then moved into a reference directory
 
 ```bash
 wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_genomic.fna.gz
 wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_genomic.gff.gz
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_cds_from_genomic.fna.gz
 gunzip *.gz
 
 mv GCF_000006945.2_ASM694v2_genomic.fna styphimurium.fna
 mv GCF_000006945.2_ASM694v2_genomic.gff styphimurium.gff
+mv GCF_000006945.2_ASM694v2_cds_from_genomic.fna styphimurium_cds_from_genomic.fna
 
 mkdir reference
 
@@ -331,22 +333,6 @@ cd ~/groupproject
 mkdir -p quant tables logs
 ```
 
-  -Get more reference for Salmonella
-
-```bash
-cd reference
-#Genome coding sequences (CDS), proteins sequence
-wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/006/945/GCF_000006945.2_ASM694v2/GCF_000006945.2_ASM694v2_cds_from_genomic.fna.gz
-
-#decompress all the .gz files
-pigz -d *.gz
-
-#Renamed files
-mv GCF_000006945.2_ASM694v2_cds_from_genomic.fna styphimurium_cds_from_genomic.fna
-
-cd ..
-
-```
 
   -Build Salmon index (from CDS)
 ```bash
