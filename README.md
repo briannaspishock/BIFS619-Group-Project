@@ -316,10 +316,22 @@ samtools flagstat alignment_bam/starvation_sorted.bam > alignment_stats/starvati
 | SRR11998473 | Starvation  |  9994445     | 95.74% |
 
 ## Annotation and Quantification
-- Tools Used: Salmon
-  - featureCounts
+- Tools Used:
+  - Salmon
     
-- **Tasks Performed:** 
+- **Tasks Performed:**
+  - **Annotation**
+  - Extracted transcript and protein IDs from the CDS FASTA file (styph_cds.fna).
+  - Parsed the GFF annotation file (styphimurium.gff) to retrieve corresponding protein_id, locus_tag, and product attributes.
+  - Sorted and joined both mapping files to generate a comprehensive annotation table (tx2gene_product.tsv) linking each transcript to its gene and product information.
+ 
+  - **Quantification**
+  - Built a Salmon index from the CDS FASTA reference (styph_cds.fna) using a k-mer length of 31.
+  - Quantified expression levels for three stress conditions
+  - Used Salmon options --validateMappings, --gcBias, and --seqBias for accurate bias correction.
+  - Generated per-condition quantification files (quant.sf) containing TPM and read count values.
+  - Combined quantification results with annotation data to produce Top-10 expressed gene tables.
+
 
 **Quantification:**
 
@@ -450,5 +462,52 @@ tables/top10_starvation.tsv
 
 - **Deliverables:**
   - Top 10 expressed genes table
-  - Top 10 expressed heatmap
-  - Functional enrichment
+### **Top 10 Expressed Genes — Acidic Condition**
+
+| **TPM** | **Gene** | **Product** | **CDS_ID** | **NumReads** |
+|---------:|-----------|--------------|-------------|--------------:|
+| 38342.901142 | STM1335 | 50S | lcl\|NC_003197.2_cds_NP_460301.1_1296 | 48449.603 |
+| 33301.169196 | STM1191 | 50S | lcl\|NC_003197.2_cds_NP_460161.1_1156 | 34823.946 |
+| 27037.638246 | STM4002 | putative | lcl\|NC_003197.2_cds_NP_462882.1_3878 | 42411.000 |
+| 25393.549091 | STM3728 | 50S | lcl\|NC_003197.2_cds_NP_462628.1_3623 | 44257.885 |
+| 24779.281014 | STM3304 | 50S | lcl\|NC_003197.2_cds_NP_462214.1_3209 | 80976.168 |
+| 22968.309500 | STM1196 | acyl | lcl\|NC_003197.2_cds_NP_460166.1_1161 | 40031.127 |
+| 20503.823884 | STM3033 | 50S | lcl\|NC_003197.2_cds_NP_462213.1_3208 | 42882.832 |
+| 19337.171510 | STM1377 | murein | lcl\|NC_003197.2_cds_NP_460342.1_1337 | 33702.351 |
+| 18379.472738 | STM3136 | 50S | lcl\|NC_003197.2_cds_NP_462032.1_1297 | 83286.315 |
+| 15873.427223 | STM3432 | 50S | lcl\|NC_003197.2_cds_NP_462336.1_3331 | 18674.188 |
+
+---
+
+### **Top 10 Expressed Genes — Oxidative Condition**
+
+| **TPM** | **Gene** | **Product** | **CDS_ID** | **NumReads** |
+|---------:|-----------|--------------|-------------|--------------:|
+| 41591.510650 | STM1377 | murein | lcl\|NC_003197.2_cds_NP_460342.1_1337 | 26232.000 |
+| 36279.152475 | STM3432 | 50S | lcl\|NC_003197.2_cds_NP_462336.1_3331 | 15254.311 |
+| 35218.546650 | STM2665 | ribosome | lcl\|NC_003197.2_cds_NP_461595.1_2590 | 56541.000 |
+| 32558.201412 | STM1191 | 50S | lcl\|NC_003197.2_cds_NP_460161.1_1156 | 12445.237 |
+| 25018.769534 | STM3429 | chaperone | lcl\|NC_003197.2_cds_NP_462319.1_4189 | 27255.463 |
+| 22272.802930 | STM4170 | DNA-binding | lcl\|NC_003197.2_cds_NP_463093.1_4035 | 19581.478 |
+| 20212.472123 | STM0831 | stress | lcl\|NC_003197.2_cds_NP_459808.1_803 | 86919.000 |
+| 18888.130876 | STM1335 | 50S | lcl\|NC_003197.2_cds_NP_460301.1_1296 | 8302.896 |
+| 15320.111492 | STM3870 | membrane-bound | lcl\|NC_003197.2_cds_NP_462769.1_3765 | 9955.283 |
+| 15120.791518 | STM0608 | alkyl | lcl\|NC_003197.2_cds_NP_459600.1_595 | 84244.000 |
+
+---
+
+### **Top 10 Expressed Genes — Starvation Condition**
+
+| **TPM** | **Gene** | **Product** | **CDS_ID** | **NumReads** |
+|---------:|-----------|--------------|-------------|--------------:|
+| 65031.124545 | STM2665 | ribosome | lcl\|NC_003197.2_cds_NP_461595.1_2590 | 50524.000 |
+| 52769.402075 | STM1377 | murein | lcl\|NC_003197.2_cds_NP_460342.1_1337 | 17219.000 |
+| 36165.782796 | STM4002 | putative | lcl\|NC_003197.2_cds_NP_462882.1_3878 | 11446.000 |
+| 34326.514490 | STM4406 | putative | lcl\|NC_003197.2_cds_NP_463267.3_4263 | 15468.000 |
+| 15647.422031 | STM2771 | filament | lcl\|NC_003197.2_cds_NP_461698.1_2693 | 144963.686 |
+| 14828.141851 | STM0238 | putative | lcl\|NC_003197.2_cds_NP_459243.1_238 | 4147.302 |
+| 13705.561029 | STM3238 | putative | lcl\|NC_003197.2_cds_NP_462142.1_3173 | 13223.851 |
+| 13531.540520 | STM4088 | putative | lcl\|NC_003197.2_cds_NP_462969.1_3965 | 4619.000 |
+| 13410.170520 | STM1751 | DNA-binding | lcl\|NC_003197.2_cds_NP_460710.1_1705 | 16774.000 |
+| 12823.920169 | STM3444 | regulatory | lcl\|NC_003197.2_cds_NP_462348.1_3343 | 2889.317 |
+
