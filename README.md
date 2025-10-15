@@ -330,7 +330,7 @@ samtools flagstat alignment_bam/starvation_sorted.bam > alignment_stats/starvati
 mamba create -n salmon-env -c bioconda -c conda-forge salmon pigz parallel -y
 conda activate salmon-env
 cd ~/groupproject
-mkdir -p quant tables logs
+mkdir -p quant tables maps
 ```
 
 
