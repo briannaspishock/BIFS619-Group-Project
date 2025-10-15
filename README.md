@@ -406,101 +406,44 @@ join -t $'\t' -1 2 -2 1 maps/fastaid2protein.sorted.tsv maps/protein2gene_produc
 ```
 
   -Top-10 tables
-  
-
-
-
-
-**Annotation:**
-
-  -Map transcript/CDS IDs → locus_tag from the CDS FASTA headers
 ```bash
-grep "^>" reference/styphimurium_cds_from_genomic.fna \
-| sed 's/^>//' \
-| awk '{
-  tx=$1;
-  lt="";
-  # accept both bracketed and unbracketed forms
-  if (match($0,/locus_tag=([A-Za-z0-9_\.-]+)/,m)) lt=m[1];
-  else if (match($0,/\[locus_tag=([A-Za-z0-9_\.-]+)\]/,m)) lt=m[1];
-  if (lt!="") print tx"\t"lt;
-}' > tables/tx2gene.tsv
-```
+#Gene-level tables from Salmon quant.sf
+#Acidic (Top 10 TPM)
+awk -F'\t' 'NR==FNR{m[$1]=$2"\t"$3; next} FNR>1{print $4"\t"m[$1]"\t"$1"\t"$5}' \
+  maps/tx2gene_product.tsv \
+  quant/acidic/quant.sf \
+| sort -nrk1 \
+| head -10 \
+| awk 'BEGIN{OFS="\t"; print "TPM","Gene","Product","CDS_ID","NumReads"} {print}' \
+> tables/top10_acidic.tsv
 
-  -build a locus_tag → gene_name/product table from the GFF
-```bash
-awk -F'\t' '$3=="gene"{
-  split($9,a,";");
-  lt=""; gn=""; pr="";
-  for(i in a){
-    if(a[i] ~ /^locus_tag=/) lt=substr(a[i],11);
-    else if(a[i] ~ /^gene=/)     gn=substr(a[i],6);
-    else if(a[i] ~ /^Name=/)     pr=substr(a[i],6);
-    else if(a[i] ~ /^product=/)  pr=substr(a[i],9);
-  }
-  if(lt!="") print lt"\t" (gn==""?"-":gn) "\t" (pr==""?"-":pr);
-}' reference/styphimurium.gff \
-> tables/gene_annot.tsv
-```
-  -Top-10 expressed genes by TPM per condition
-```bash
-# Sort tx2gene.tsv by the first column (transcript ID)
-sort -k1,1 tables/tx2gene.tsv -o tables/tx2gene.tsv
+#Oxidative (Top 10 TPM)
+awk -F'\t' 'NR==FNR{m[$1]=$2"\t"$3; next} FNR>1{print $4"\t"m[$1]"\t"$1"\t"$5}' \
+  maps/tx2gene_product.tsv \
+  quant/oxidative/quant.sf \
+| sort -nrk1 | head -10 \
+| awk 'BEGIN{OFS="\t"; print "TPM","Gene","Product","CDS_ID","NumReads"} {print}' \
+> tables/top10_oxidative.tsv
 
-for cond in acidic oxidative starvation; do
-  # Extract transcript and TPM
-  awk 'NR>1{print $1"\t"$4}' quant/${cond}/quant.sf \
-    | sort -k1,1 > tables/${cond}.tx_tpm.tsv
+#Starvation (Top 10 TPM)
+awk -F'\t' 'NR==FNR{m[$1]=$2"\t"$3; next} FNR>1{print $4"\t"m[$1]"\t"$1"\t"$5}' \
+  maps/tx2gene_product.tsv \
+  quant/starvation/quant.sf \
+| sort -nrk1 | head -10 \
+| awk 'BEGIN{OFS="\t"; print "TPM","Gene","Product","CDS_ID","NumReads"} {print}' \
+> tables/top10_starvation.tsv
 
-  # Sum TPM per gene
-  join -t $'\t' -1 1 -2 1 tables/${cond}.tx_tpm.tsv tables/tx2gene.tsv \
-    | awk -F'\t' '{tpm[$3]+=$2} END{for(g in tpm) print g"\t"tpm[g]}' \
-    | sort -k2,2nr | head -n 10 > tables/top10_${cond}_TPM.raw.tsv
-
-  # Annotate gene names and products
-  sort -k1,1 tables/top10_${cond}_TPM.raw.tsv > tables/a.tmp
-  sort -k1,1 tables/gene_annot.tsv > tables/b.tmp
-  join -t $'\t' -1 1 -2 1 tables/a.tmp tables/b.tmp \
-    | awk -F'\t' 'BEGIN{OFS="\t"}{print $1,$2,($3==""?"-":$3),($4==""?"-":$4)}' \
-    > tables/top10_${cond}_TPM.annot.tsv
-
-sort -k2,2nr tables/top10_${cond}_TPM.annot.tsv -o tables/top10_${cond}_TPM.annot.tsv
-
-  rm -f tables/a.tmp tables/b.tmp
-  echo "Rebuilt clean top 10 for $cond -> tables/top10_${cond}_TPM.annot.tsv"
-done
-
-
-#Add headers to all 3 files
-for cond in acidic oxidative starvation; do
-  file="tables/top10_${cond}_TPM.annot.tsv"
-  tmp="tables/top10_${cond}_TPM.annot.tmp"
-  echo -e "locus_tag\tTPM_sum\tgene_name\tproduct" > "$tmp"
-  cat "$file" >> "$tmp"
-  mv "$tmp" "$file"
-  echo "Added header to $file"
-done
 ```
 
   -Each
   
-  tables/top10_acidic_TPM.annot.tsv
+tables/top10_acidic.tsv
 
-   tables/top10_oxidative_TPM.annot.tsv
-   
-   tables/top10_starvation_TPM.annot.tsv
-   
-  contains:
-    
-  locus_tag : The unique gene ID in the genome (from the annotation .gff file)
-  
-  TPM_sum : The total expression level for that gene, summed across its transcripts. The higher the TPM, the more abundant the RNA
-  
-  gene_name : The standard gene symbol
-  
-  product : The protein or functional product encoded by the gene
-    
-   
+tables/top10_oxidative.tsv
+
+tables/top10_starvation.tsv
+
+ 
 
 - **Deliverables:**
   - Top 10 expressed genes table
