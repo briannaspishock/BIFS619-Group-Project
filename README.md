@@ -250,44 +250,40 @@ hisat2-build styphimurium.fna styph_index
 cd ../
 
 #create alignment directory
-mkdir alignment_sam
+mkdir -p alignment_bam
 
 # perform alignments with Hisat2  using cleaned fastq (these may take a few minutes)
-# Acidic Stress Sample
+#acidic
 hisat2 -p 8 -x reference/styph_index \
  -1 trimmed/SRR11998457_1.clean.fastq.gz \
- -2 trimmed/SRR11998457_2.clean.fastq.gz \
- -S alignment_sam/acidic.sam
+ -2 trimmed/SRR11998457_2.clean.fastq.gz | \
+ samtools view -b - | \
+ samtools sort -o alignment_bam/acidic_sorted.bam
 
-# Oxidative Stress Sample
+#oxidative
 hisat2 -p 8 -x reference/styph_index \
  -1 trimmed/SRR11998467_1.clean.fastq.gz \
- -2 trimmed/SRR11998467_2.clean.fastq.gz \
- -S alignment_sam/oxidative.sam
+ -2 trimmed/SRR11998467_2.clean.fastq.gz | \
+ samtools view -b - | \
+ samtools sort -o alignment_bam/oxidative_sorted.bam
 
-# Starvation Stress Sample # My disk storage was full and i got kicked off here
+#starvation
 hisat2 -p 8 -x reference/styph_index \
  -1 trimmed/SRR11998473_1.clean.fastq.gz \
- -2 trimmed/SRR11998473_2.clean.fastq.gz \
- -S alignment_sam/starvation.sam
+ -2 trimmed/SRR11998473_2.clean.fastq.gz | \
+ samtools view -b - | \
+ samtools sort -o alignment_bam/starvation_sorted.bam
 
-# processing next steps
-# Create directories for our BAM files
-mkdir alignment_bam
-mkdir alignment_bam_sorted
 
-# 1. Convert SAM to BAM, Sort, and Index
-for sample in acidic oxidative starvation
-do
-  # Convert SAM to BAM
-  samtools view -bS alignment_sam/${sample}.sam > alignment_bam/${sample}.bam
+# index the acidic sample
+samtools index alignment_bam/acidic_sorted.bam
 
-  # Sort the BAM file
-  samtools sort alignment_bam/${sample}.bam -o alignment_bam_sorted/${sample}.sorted.bam
+# Index the oxidative sample
+samtools index alignment_bam/oxidative_sorted.bam
 
-  # Index the sorted BAM file
-  samtools index alignment_bam_sorted/${sample}.sorted.bam
-done
+# Index the starvation sample
+samtools index alignment_bam/starvation_sorted.bam
+
 
 ```
 
@@ -296,6 +292,7 @@ done
   - 
 
 - **Deliverables:**
+- 1-2 tables with alignment metrics
   - Identify top 10 genes expressed
   - Optional: perform functional enrichment 
 
