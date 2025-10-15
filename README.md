@@ -233,12 +233,11 @@ chmod +x qc_workflow.sh
 - Tools Used:
   - HISAT2
   - Samtools
-  - Subread (https://subread.sourceforge.net/) for feature counting
+  - Samtools flagstat for alignment data
 ```bash
 #install packages
 sudo apt install samtools
 sudo apt install hisat2
-sudo apt install subread
 
 #change directory to ref genome
 cd reference/
@@ -284,17 +283,35 @@ samtools index alignment_bam/oxidative_sorted.bam
 # Index the starvation sample
 samtools index alignment_bam/starvation_sorted.bam
 
+#alignment statistics
+ mkdir -p alignment_stats
+
+# Acidic sample
+samtools flagstat alignment_bam/acidic_sorted.bam > alignment_stats/acidic_stats.txt
+
+# Oxidative sample
+samtools flagstat alignment_bam/oxidative_sorted.bam > alignment_stats/oxidative_stats.txt
+
+# Starvation sample
+samtools flagstat alignment_bam/starvation_sorted.bam > alignment_stats/starvation_stats.txt
 
 ```
 
 - **Tasks Performed:** 
-  - 
-  - 
+  - created index files from reference genome
+  - created sam files from trimmed, cleaned fastq 
+  - align, converted sam to bam
+  - index bam files
+  - used flagstat for alignment metrics  
 
 - **Deliverables:**
 - 1-2 tables with alignment metrics
-  - Identify top 10 genes expressed
-  - Optional: perform functional enrichment 
+
+  | Sample Name | Condition   | Total Reads  | Mapping % |
+| :---------- | :---------- | :----------- | :-------- |
+| SRR11998457 | Acidic      |  43363202    |  95.72%     |
+| SRR11998467 | Oxidative   |  19077236    |  95.94% |
+| SRR11998473 | Starvation  |  9994445     | 95.74% |
 
 ## Annotation and Quantification
 - Tools Used: Salmon
