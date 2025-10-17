@@ -70,11 +70,14 @@ multiqc . --export
 
 - **Deliverables:**
 ### 2 QC plots raw data
-Plot 1 : GC Content (Raw)
+Plot 1 : GC Content (Raw) - GC content is stable 
+
 <img src="qc/figures/raw/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png" width="600">
 
-Plot 2 : Adapter Content (Raw)
+Plot 2 : Adapter Content (Raw) - Adapter contamination detected in raw reads prior to trimming.
+
 <img src="qc/figures/raw/mqc_fastqc_adapter_content_plot_1.png" width="600">
+
 
 ### Raw Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 
@@ -166,7 +169,8 @@ multiqc . -o multiqc_trimmed
 
 - **Deliverables:**
 ### 1 QC plots for cleaned data
-Plot 3 : Pre vs Post Trimming Read Counts
+Plot 3 : Pre vs Post Trimming Read Counts - Horizontal bars show read counts for samples. The blue portion represents reads retained after trimming while the orange portion represents adapters or short reads that were discarded. The majority of the reads were retained confirming successful trimming.
+
 <img src="qc/figures/comparison/mqc_fastp_filtered_reads_plot_1.png" width="600">
 
 ### Cleaned Read Counts and Duplication Rates (from multiqc_general_stats.txt)
