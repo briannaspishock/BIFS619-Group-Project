@@ -70,8 +70,11 @@ multiqc . --export
 
 - **Deliverables:**
 ### 2 QC plots raw data
-<img src="qc/figures/raw/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png" width="400">
-<img src="qc/figures/raw/mqc_fastqc_adapter_content_plot_1.png" width="400">
+Plot 1 : GC Content (Raw)
+<img src="qc/figures/raw/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png" width="600">
+
+Plot 2 : Adapter Content (Raw)
+<img src="qc/figures/raw/mqc_fastqc_adapter_content_plot_1.png" width="600">
 
 ### Raw Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 
@@ -163,7 +166,10 @@ multiqc . -o multiqc_trimmed
 
 - **Deliverables:**
 ### 2 QC plots for cleaned data
-<img src="qc/figures/trimmed/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png" width="400">
+Plot 3 : GC Content (Trimmed)
+<img src="qc/figures/trimmed/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png" width="600">
+
+Plot 4 : Adapter Content (Trimmed)
 <img src="qc/figures/trimmed/mqc_fastqc_adapter_content_plot_1.png" width="400">
 
 ### Cleaned Read Counts and Duplication Rates (from multiqc_general_stats.txt)
