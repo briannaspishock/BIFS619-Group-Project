@@ -69,8 +69,9 @@ multiqc . --export
   - Ran MultiQC to put all FastQC results into a single summary report (`multiqc_report.html`)  
 
 - **Deliverables:**
-### 1-2 QC plots raw data
-  - QC plots in analysis file
+### 2 QC plots raw data
+<img src="qc/figures/raw/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png" width="400">
+<img src="qc/figures/raw/mqc_fastqc_adapter_content_plot_1.png" width="400">
 
 ### Raw Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 
@@ -161,8 +162,9 @@ multiqc . -o multiqc_trimmed
   - Ran `multiqc` on the trimmed files
 
 - **Deliverables:**
-### 1-2 QC plots for cleaned data
-  - QC plots in analysis doc
+### 2 QC plots for cleaned data
+<img src="qc/figures/trimmed/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png" width="400">
+<img src="qc/figures/trimmed/mqc_fastqc_adapter_content_plot_1.png" width="400">
 
 ### Cleaned Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 | Sample        | fastp Dup % | fastp Q30 Rate | fastp Q30 Bases | fastp GC % | % Surviving | % Adapters | FastQC Dup % | FastQC GC % | Avg Length (bp) | Total Reads |
