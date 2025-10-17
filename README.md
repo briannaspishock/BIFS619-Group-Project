@@ -70,7 +70,7 @@ multiqc . --export
 
 - **Deliverables:**
 ### 2 QC plots raw data
-Plot 1 : GC Content (Raw) - GC content is stable 
+Plot 1 : GC Content (Raw) - GC distribution or raw reads is ~50-51% indicates no GC bias in raw reads.
 
 <img src="qc/figures/raw/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png" width="600">
 
