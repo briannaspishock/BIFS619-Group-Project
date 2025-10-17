@@ -1,0 +1,7 @@
+Sample	Condition	Raw Reads	Duplication %	GC %	Avg Length (bp)
+SRR11998457_1	Acidic	22.7 M	100%	50%	143
+SRR11998457_2	Acidic	22.7 M	100%	50%	151
+SRR11998467_1	Oxidative	10.2 M	100%	51%	143
+SRR11998467_2	Oxidative	10.2 M	100%	51%	151
+SRR11998473_1	Starvation	5.4 M	100%	51%	143
+SRR11998473_2	Starvation	5.4 M	100%	50%	151
