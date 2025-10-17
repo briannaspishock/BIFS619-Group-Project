@@ -1,0 +1,7 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	SRR11998457_1	/home/StudentFirst/groupproject/qc_reports/SRR11998457_1_fastqc.zip
+FastQC	all_sections	SRR11998457_2	/home/StudentFirst/groupproject/qc_reports/SRR11998457_2_fastqc.zip
+FastQC	all_sections	SRR11998467_1	/home/StudentFirst/groupproject/qc_reports/SRR11998467_1_fastqc.zip
+FastQC	all_sections	SRR11998467_2	/home/StudentFirst/groupproject/qc_reports/SRR11998467_2_fastqc.zip
+FastQC	all_sections	SRR11998473_1	/home/StudentFirst/groupproject/qc_reports/SRR11998473_1_fastqc.zip
+FastQC	all_sections	SRR11998473_2	/home/StudentFirst/groupproject/qc_reports/SRR11998473_2_fastqc.zip

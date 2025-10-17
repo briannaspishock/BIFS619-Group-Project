@@ -1,0 +1,7 @@
+Sample	Condition	Clean Reads	Duplication %	GC %	Avg Length (bp)
+SRR11998457_1.clean	Acidic	21.0 M	100%	50%	30-143
+SRR11998457_2.clean	Acidic	21.0 M	100%	50%	31-151
+SRR11998467_1.clean	Oxidative	9.4 M	100%	51%	30-143
+SRR11998467_2.clean	Oxidative	9.4 M	100%	50%	31-151
+SRR11998473_1.clean	Starvation	4.8 M	100%	51%	31-143
+SRR11998473_2.clean	Starvation	4.8 M	100%	50%	31-151
