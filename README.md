@@ -165,12 +165,9 @@ multiqc . -o multiqc_trimmed
   - Ran `multiqc` on the trimmed files
 
 - **Deliverables:**
-### 2 QC plots for cleaned data
-Plot 3 : GC Content (Trimmed)
-<img src="qc/figures/trimmed/mqc_fastqc_per_sequence_gc_content_plot_Percentages.png" width="600">
-
-Plot 4 : Adapter Content (Trimmed)
-<img src="qc/figures/trimmed/mqc_fastqc_adapter_content_plot_1.png" width="400">
+### 1 QC plots for cleaned data
+Plot 3 : Pre vs Post Trimming Read Counts
+<img src="qc/figures/comparison/mqc_fastp_filtered_reads_plot_1.png" width="600">
 
 ### Cleaned Read Counts and Duplication Rates (from multiqc_general_stats.txt)
 | Sample        | fastp Dup % | fastp Q30 Rate | fastp Q30 Bases | fastp GC % | % Surviving | % Adapters | FastQC Dup % | FastQC GC % | Avg Length (bp) | Total Reads |
