@@ -319,13 +319,14 @@ featureCounts -p \
 - **Deliverables:**
 - 1-2 tables with alignment metrics
 
+## Flagstat data summary 
 | Sample Name | Condition   | Total Reads  | Mapping % |
 | :---------- | :---------- | :----------- | :-------- |
 | SRR11998457 | Acidic      |  43363202    |  95.72%   |
 | SRR11998467 | Oxidative   |  19077236    |  95.94%   |
 | SRR11998473 | Starvation  |  9994445     |  95.74%   |
 
-
+## Feature Counts Summary
 <img width="879" height="590" alt="image" src="https://github.com/user-attachments/assets/98646640-cec3-4825-b6de-8443446f7cfe" />
 
 ## Annotation and Quantification
