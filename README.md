@@ -227,10 +227,12 @@ mv styphimurium.* reference/
   - HISAT2
   - Samtools
   - Samtools flagstat for alignment data
+  - subread (featureCounts) https://subread.sourceforge.net/featureCounts.html
 ```bash
 #install packages
 sudo apt install samtools
 sudo apt install hisat2
+sudo apt install subread
 
 #change directory to ref genome
 cd reference/
@@ -288,6 +290,22 @@ samtools flagstat alignment_bam/oxidative_sorted.bam > alignment_stats/oxidative
 # Starvation sample
 samtools flagstat alignment_bam/starvation_sorted.bam > alignment_stats/starvation_stats.txt
 
+# --- subread for feature counts ---
+
+# Create a directory for the count results
+mkdir -p feature_counts
+
+# Run featureCounts
+featureCounts -p \
+              -F GFF \
+              -t gene \
+              -g locus_tag \
+              -a reference/styphimurium.gff \
+              -o feature_counts/all_samples_counts.txt \
+              alignment_bam/acidic_sorted.bam \
+              alignment_bam/oxidative_sorted.bam \
+              alignment_bam/starvation_sorted.bam
+
 ```
 
 - **Tasks Performed:** 
@@ -301,10 +319,21 @@ samtools flagstat alignment_bam/starvation_sorted.bam > alignment_stats/starvati
 - 1-2 tables with alignment metrics
 
   | Sample Name | Condition   | Total Reads  | Mapping % |
-| :---------- | :---------- | :----------- | :-------- |
+| :---------- | :---------- | :----------- | :--------   |
 | SRR11998457 | Acidic      |  43363202    |  95.72%     |
-| SRR11998467 | Oxidative   |  19077236    |  95.94% |
-| SRR11998473 | Starvation  |  9994445     | 95.74% |
+| SRR11998467 | Oxidative   |  19077236    |  95.94%     |
+| SRR11998473 | Starvation  |  9994445     |  95.74%      |
+
+Status	acidic_sorted.bam	oxidative_sorted.bam	starvation_sorted.bam
+Assigned	33,401,310	15,903,075	8,224,321
+Unassigned_Ambiguity	4,742,490	1,633,075	647,189
+Unassigned_MultiMapping	2,130,279	415,736	405,344
+Unassigned_Unmapped	1,855,500	774,131	425,741
+Unassigned_NoFeatures	1,233,623	351,219	291,850
+Unassigned_Other	0	0	0
+Total Reads	43,363,202	19,077,236	9,994,445
+Percent Assigned to Gene	77.03%	83.36%	82.29%
+<img width="879" height="590" alt="image" src="https://github.com/user-attachments/assets/98646640-cec3-4825-b6de-8443446f7cfe" />
 
 ## Annotation and Quantification
 - Tools Used:
