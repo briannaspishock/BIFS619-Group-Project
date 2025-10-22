@@ -313,7 +313,8 @@ featureCounts -p \
   - created sam files from trimmed, cleaned fastq 
   - align, converted sam to bam
   - index bam files
-  - used flagstat for alignment metrics  
+  - used flagstat for alignment metrics
+  - used featureCounts for alignment features
 
 - **Deliverables:**
 - 1-2 tables with alignment metrics
