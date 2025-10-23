@@ -319,9 +319,8 @@ featureCounts -p \
 - **Deliverables:**
 - 1-2 tables with alignment metrics
 
-## Flagstat data summary 
-<img width="1026" height="308" alt="image" src="https://github.com/user-attachments/assets/3a216b37-cbdc-43b0-9c29-9e2fa5bd2e06" />
-
+## Flagstat Data Summary 
+<img width="905" height="222" alt="image" src="https://github.com/user-attachments/assets/7987ed93-1e3f-4f7f-9d40-d7929ce8e83c" />
 
 ## Feature Counts Summary
 <img width="879" height="590" alt="image" src="https://github.com/user-attachments/assets/98646640-cec3-4825-b6de-8443446f7cfe" />
