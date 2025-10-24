@@ -226,7 +226,7 @@ mv styphimurium.* reference/
 - Tools Used:
   - HISAT2
   - Samtools
-  - Samtools flagstat for alignment data
+  - Samtools flagstat for alignment data https://samtools.org/what-information-does-samtools-flagstat-provide/
   - subread (featureCounts) https://subread.sourceforge.net/featureCounts.html
 ```bash
 #install packages
