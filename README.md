@@ -421,8 +421,8 @@ $3=="CDS" {
 }' reference/styphimurium.gff > maps/protein2gene_product.tsv
 
 #Sort and join on protein_id
-sort -k2,2 maps/fastaid2protein.tsv > maps/fastaid2protein.sorted.tsv   # key is col2
-sort -k1,1 maps/protein2gene_product.tsv > maps/protein2gene_product.sorted.tsv  # key is col1
+sort -k2,2 maps/fastaid2protein.tsv > maps/fastaid2protein.sorted.tsv
+sort -k1,1 maps/protein2gene_product.tsv > maps/protein2gene_product.sorted.tsv
 
 # Join on protein_id, then reorder to (transcript_id, gene, product)
 join -t $'\t' -1 2 -2 1 maps/fastaid2protein.sorted.tsv maps/protein2gene_product.sorted.tsv \
